@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const path = require("path");
+
+require("dotenv").config({
+    path: path.resolve(process.cwd(), '.env.build-payload')
+});
+
+process.argv.push("build")
+
+require("payload/dist/bin")

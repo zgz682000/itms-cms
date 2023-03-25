@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.3.0/weui.css"/>
+</head>
+<script>
+    function onAppCellClick(appId){
+        window.location.href = "dist-list?appId=" + appId;
+    }
+</script>
+<body style="background-color: var(--weui-BG-0)">
+    <h2 style="padding-top: 30px; padding-bottom: 10px; padding-left: 30px; text-align: left;"><%= title %></h2>
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">App列表</div>
+        <div class="weui-panel__bd">
+            <% apps.forEach((app)=>{ %>
+                <div class="weui-media-box weui-media-box_appmsg" onclick="onAppCellClick('<%= app.id %>')">
+                    <div aria-hidden="true" class="weui-media-box__hd" style="border-radius: 20%;background-color: var(--weui-BG-0);" >
+                        <img class="weui-media-box__thumb" src="<%= app.iconUrl %>"  alt="">
+                    </div>
+                    <div aria-hidden="true" id="js_p1m1_bd" class="weui-media-box__bd">
+                        <strong class="weui-media-box__title">
+                            <%= app.name %>
+                        </strong>
+                        <p class="weui-media-box__desc">
+                            平台：<%= app.platforms.indexOf("ios") != -1 ? "iOS" : "" %> <%= app.platforms.indexOf("android") != -1 ? "安卓" : ""%>
+                        </p>    
+                    </div>
+                </div>
+            <%}) %>
+        </div>
+    </div>
+</body>
+</html>

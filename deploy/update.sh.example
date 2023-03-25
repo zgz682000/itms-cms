@@ -1,0 +1,5 @@
+#! /bin/sh
+docker pull xxx/itms-cms:$1 &&
+docker stop itms_cms ;
+docker rm itms_cms ;
+docker run --name itms_cms -v /path/to/itms:/home/node/static -p 3001:3001 -d xxx/itms-cms:$1

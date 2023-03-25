@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= dist.app.name %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.3.0/weui.css"/>
+</head>
+<script>
+    function onInstallIPAClick(){
+        window.location.href = "itms-services://?action=download-manifest&url=" + window.location.protocol + "//" + window.location.host + "/ipa/" + "<%= dist.id %>.plist"
+    }
+    function onInstallAPKClick(){
+        window.location.href = "<%= dist.apk ? dist.apk.url : '' %>"
+    }
+</script>
+<body style="background-color: var(--weui-BG-0)">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">发布版本详情</div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div aria-hidden="true" class="weui-media-box__hd" style="width:80px;height:80px;border-radius: 20%;background-color: var(--weui-BG-0);" >
+                    <img class="weui-media-box__thumb" src="<%= dist.app.iconUrl %>"  alt="">
+                </div>
+                <div aria-hidden="true" id="js_p1m1_bd" class="weui-media-box__bd">
+                    <strong class="weui-media-box__title">
+                        <%= dist.app.name %>
+                    </strong>
+                    <% if(dist.desc){ %>
+                    <p class="weui-media-box__desc">
+                        <%= dist.desc %>
+                    </p>
+                    <% } %>
+                </div>
+            </div>
+            <% if(dist.ipa || dist.apk) { %>
+                <div class="weui-media-box weui-media-box_text">
+                    <strong class="weui-media-box__title">包名</strong>
+                    <% if(dist.ipa) { %>
+                        <p class="weui-media-box__desc">ipa：<%= dist.ipa.bundleid%></p>
+                    <% } %>
+                    <% if(dist.apk) { %>
+                        <p class="weui-media-box__desc">apk：<%= dist.apk.bundleid%></p>
+                    <% } %>
+                </div>
+                <div class="weui-media-box weui-media-box_text">
+                    <strong class="weui-media-box__title">版本号</strong>
+                    <% if(dist.ipa) { %>
+                        <p class="weui-media-box__desc">ipa：<%= dist.ipa.version%>(<%= dist.ipa.build %>) </p>
+                    <% } %>
+                    <% if(dist.apk) { %>
+                        <p class="weui-media-box__desc">apk：<%= dist.apk.version%>(<%= dist.apk.build %>)</p>
+                    <% } %>
+                </div>
+                <div class="weui-media-box weui-media-box_text">
+                    <strong class="weui-media-box__title">文件大小</strong>
+                    <% if(dist.ipa) { %>
+                        <p class="weui-media-box__desc">ipa：<%= (dist.ipa.filesize / 1024 / 1024).toFixed(2)%>MB</p>
+                    <% } %>
+                    <% if(dist.apk) { %>
+                        <p class="weui-media-box__desc">apk：<%= (dist.apk.filesize / 1024 / 1024).toFixed(2)%>MB</p>
+                    <% } %>
+                </div>
+            <% } %>
+            <div class="weui-media-box weui-media-box_text">
+                <strong class="weui-media-box__title">发布时间</strong>
+                <p class="weui-media-box__desc"><%= dist.createDate %></p>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex" style="margin-top: 15px;margin-right: 15px;">
+        <% if(dist.ipa) { %>
+            <div class="weui-flex__item">
+                <a onclick="onInstallIPAClick()" role="button" style="width: auto; margin-left: 15px;" class="weui-btn weui-btn_primary">安装IPA</a>
+            </div>
+        <% } %>
+        <% if(dist.apk) { %>
+            <div class="weui-flex__item">
+                <a onclick="onInstallAPKClick()" role="button" style="width: auto; margin-left: 15px;" class="weui-btn weui-btn_primary">安装APK</a>
+            </div>
+        <% } %>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+
+rm -rf build
+rm -rf dist
+rm -f dist.zip
+npm run build
+mv build dist
+cp package.json dist/package.json
+cp yarn.lock dist/yarn.lock
+cp .env.prod dist/.env
+zip -ry dist.zip dist
+
+VER3=$(awk -F '\"' '/"version": "*"/{print $4}' package.json | awk -F '.' '{printf("%s.%s.%s",$1,$2,$3)}')
+docker build --tag xxx/itms-cms:${VER3} ./ &&
+docker image push xxx/itms-cms:${VER3}

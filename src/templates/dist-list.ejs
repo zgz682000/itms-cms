@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= app.name %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.3.0/weui.css"/>
+</head>
+<script>
+    function onDistCellClick(distId){
+        window.location.href = "/dist-info?distId=" + distId;
+    }
+</script>
+<body style="background-color: var(--weui-BG-0)">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">发布版本列表</div>
+        <div class="weui-panel__bd">
+            <% dists.forEach((dist)=>{ %>
+                <div class="weui-media-box weui-media-box_text" onclick="onDistCellClick('<%= dist.id %>')">
+                    <strong class="weui-media-box__title"><%= dist.desc %></strong>
+                    <p class="weui-media-box__desc">
+                        <% if(dist.ipa) { %>iOS：<%= dist.ipa.version %>(<%= dist.ipa.build %>)<% } %>
+                        <% if(dist.apk) { %>安卓：<%= dist.apk.version %>(<%= dist.apk.build %>)<% } %>
+                    </strong>
+                    <p class="weui-media-box__desc"><%= dist.createDate %></p>
+                </div>
+            <%}) %>
+        </div>
+    </div>
+</body>
+</html>
