@@ -3,6 +3,9 @@ FROM node:16-alpine as builder
 COPY ./dist /home/node/app
 WORKDIR /home/node/app
 ENV NODE_ENV=production
+
+RUN apk add --update --no-cache git
+
 VOLUME [ "/home/node/static" ]
 
 RUN yarn config set sharp_binary_host "https://npmmirror.com/mirrors/sharp"
