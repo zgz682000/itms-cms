@@ -937,9 +937,9 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-"app-package-parser@https://github.com/zgz682000/app-package-parser.git":
+"app-package-parser@https://github.com/zgz682000/app-package-parser.git#0c0a9044b95ea1e39495c09de284f6591a47b426":
   version "1.1.0"
-  resolved "https://github.com/zgz682000/app-package-parser.git#8a1ca58dbca69ca82f94cbbdfeb4f686aef979a9"
+  resolved "https://github.com/zgz682000/app-package-parser.git#0c0a9044b95ea1e39495c09de284f6591a47b426"
   dependencies:
     bytebuffer "^5.0.1"
     cgbi-to-png "^1.0.7"

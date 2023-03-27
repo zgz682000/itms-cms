@@ -3,9 +3,6 @@ import payload from "payload";
 import { PayloadRequest } from "payload/types";
 import {IpaReader, ApkReader}  from "app-package-parser";
 
-const PLIST_REG = new RegExp("payload/[^/]+?.app/info.plist$", "i");
-const PROVISION_REG = /payload\/.+?\.app\/embedded.mobileprovision/;
-
 export const afterAPKUpload = async(args: {
     doc: any;
     req: PayloadRequest;
@@ -59,7 +56,7 @@ export const afterIPAUpload = async (args: {
     let ipaInfo: any;
     try {
         let ipaReader = new IpaReader(ipaRenamedPath);
-        ipaInfo = await ipaReader.parse([PLIST_REG, PROVISION_REG]);
+        ipaInfo = await ipaReader.parse();
     } catch (error) {
         throw new Error("ipa parse failure: " + ((error as Error).message || error));
     }
